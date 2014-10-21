@@ -7,11 +7,8 @@ var rename = require('gulp-rename');
 gulp.task('default', function() {
 	// load JSON data
 	var snippets = fs.readFileSync('./node_modules/emmet/lib/snippets.json', {encoding: 'utf8'});
-	var caniuse = fs.readFileSync('./node_modules/emmet/lib/caniuse.json', {encoding: 'utf8'});
-
 	var loadData = 'var emmet = require("emmet/emmet");emmet.loadUserData({' +
-		'snippets: ' + snippets + ',' +
-		'caniuse: ' + caniuse +
+		'snippets: ' + snippets 
 		'});';
 
 	return requirejs({
@@ -21,7 +18,6 @@ gulp.task('default', function() {
 		out: 'emmet.js',
 		paths: {
 			emmet: 'node_modules/emmet/lib',
-			lodash: 'node_modules/emmet/node_modules/lodash/lodash'
 		},
 		wrap: {
 			start: '(function (root, factory) {if (typeof define === "function" && define.amd) {define(factory);} else {root.emmetPlugin = factory();}}(this, function () {',
